@@ -236,9 +236,29 @@ def player_with_longest_name
       if player_info[:player_name].length > longest_count
         longest_count = player_info[:player_name].length
         longest_name = player_info[:player_name]
-        binding.pry
       end
     }
   }
   longest_name
 end
+def long_name_steals_a_ton
+  longest_count = 0
+  longest_name = ""
+  most_steals = 0
+  stealer_name = ""
+  game_hash.each {|team, team_info|
+    team_info[:players].each {|player_info|
+      if player_info[:player_name].length > longest_count
+        longest_count = player_info[:player_name].length
+        longest_name = player_info[:player_name]
+      end
+      if player_info[:steals] > most_steals
+        most_steals = player_info[:steals]
+        stealer_name = player_info[:player_name]
+      end
+    }
+  }
+  return stealer_name == longest_name
+end
+
+puts long_name_steals_a_ton
