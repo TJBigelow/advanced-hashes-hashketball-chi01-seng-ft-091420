@@ -260,5 +260,3 @@ def long_name_steals_a_ton
   }
   return stealer_name == longest_name
 end
-
-puts long_name_steals_a_ton
