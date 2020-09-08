@@ -195,3 +195,50 @@ def big_shoe_rebounds
   }
   rebounds
 end
+
+def most_points_scored
+  best_player = ''
+  points_scored = 0
+  game_hash.each {|team, team_info|
+    team_info[:players].each {|player_info|
+      if player_info[:points] > points_scored
+        points_scored = player_info[:points]
+        best_player = player_info[:player_name]
+      end
+    }
+  }
+  best_player
+end
+
+def winning_team
+  home_score = 0
+  away_score = 0
+  game_hash[:home][:players].each {|player_info|
+    home_score += player_info[:points]
+  }
+  game_hash[:away][:players].each {|player_info|
+    away_score += player_info[:points]
+  }
+  if home_score > away_score
+    return game_hash[:home][:team_name]
+  elsif home_score < away_score
+    return game_hash[:away][:team_name]
+  else
+    return nil
+  end
+end
+
+def player_with_longest_name
+  longest_count = 0
+  longest_name = ""
+  game_hash.each {|team, team_info|
+    team_info[:players].each {|player_info|
+      if player_info[:player_name].length > longest_count
+        longest_count = player_info[:player_name].length
+        longest_name = player_info[:player_name]
+        binding.pry
+      end
+    }
+  }
+  longest_name
+end
